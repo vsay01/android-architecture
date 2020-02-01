@@ -1,105 +1,88 @@
-# Android Architecture Blueprints [beta]
+# Android Architecture Blueprints v2
+<p align="center">
+<img src="https://github.com/googlesamples/android-architecture/wiki/images/aab-logov2.png" alt="Illustration by Virginia Poltrack"/>
+</p>
 
-<img src="https://github.com/googlesamples/android-architecture/wiki/images/aab-logo.png" alt="Android Architecture Blueprints"/>
+Android Architecture Blueprints is a project to showcase different architectural approaches to developing Android apps. In its different branches you'll find the same app (a TODO app) implemented with small differences.
 
-The Android framework offers a lot of flexibility when it comes to defining how
-to organize and <em>architect</em> an Android app. This freedom, whilst very valuable, can also result in apps
-with large classes, inconsistent naming and architectures (or lack of) that can
-make testing, maintaining and extending difficult.
+In this branch you'll find:
+*   Kotlin **[Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)** for background operations.
+*   A single-activity architecture, using the **[Navigation component](https://developer.android.com/guide/navigation/navigation-getting-started)** to manage fragment operations.
+*   A presentation layer that contains a fragment (View) and a **ViewModel** per screen (or feature).
+*   Reactive UIs using **LiveData** observables and **Data Binding**.
+*   A **data layer** with a repository and two data sources (local using Room and remote) that are queried with one-shot operations (no listeners or data streams).
+*   Two **product flavors**, `mock` and `prod`, [to ease development and testing](https://android-developers.googleblog.com/2015/12/leveraging-product-flavors-in-android.html) (except in the Dagger branch).
+*   A collection of unit, integration and e2e **tests**, including "shared" tests that can be run on emulator/device or Robolectric.
 
-Android Architecture Blueprints is meant to demonstrate possible ways to help
-with these common problems. In this project we offer the same application
-implemented using different architectural concepts and tools.
+## Variations
 
-You can use these samples as a reference or as a starting point for creating
-your own apps. The focus here is on code structure, architecture, testing and
-maintainability. However, bear in mind that there are many ways to build apps
-with these architectures and tools, depending on your priorities, so these
-shouldn't be considered canonical examples. The UI is deliberately kept simple.
+This project hosts each sample app in separate repository branches. For more information, see the `README.md` file in each branch.
 
-## Samples
+### Stable samples - Kotlin
+|     Sample     | Description |
+| ------------- | ------------- |
+| [master](https://github.com/googlesamples/android-architecture/tree/master) | The base for the rest of the branches. <br/>Uses Kotlin, Architecture Components, coroutines, Data Binding, etc. and uses Room as source of truth, with a reactive UI. |
+| [dagger-android](https://github.com/googlesamples/android-architecture/tree/dagger-android)<br/>[[compare](https://github.com/googlesamples/android-architecture/compare/dagger-android#files_bucket)] | A simple Dagger setup that uses `dagger-android` and removes the two flavors. |
+| [usecases](https://github.com/googlesamples/android-architecture/tree/usecases)<br/>[[compare](https://github.com/googlesamples/android-architecture/compare/usecases#files_bucket)] | Adds a new domain layer that uses UseCases for business logic. |
 
-All projects are released in their own branch. Check each project's README for
-more information.
+### Old samples - Kotlin and Java
 
-### Stable samples
+Blueprints v1 had a collection of samples that are not maintained anymore, but can still be useful. See [all project branches](https://github.com/googlesamples/android-architecture/branches).
 
-  * [todo-mvp/](https://github.com/googlesamples/android-architecture/tree/todo-mvp/) - Basic Model-View-Presenter architecture.
-  * [todo-mvp-loaders/](https://github.com/googlesamples/android-architecture/tree/todo-mvp-loaders/) - Based on todo-mvp, fetches data using Loaders.
-  * [todo-databinding/](https://github.com/googlesamples/android-architecture/tree/todo-databinding/) - Based on todo-mvp, uses the Data Binding Library.
-  * [todo-mvp-clean/](https://github.com/googlesamples/android-architecture/tree/todo-mvp-clean/) - Based on todo-mvp, uses concepts from Clean Architecture.
-  * [todo-mvp-dagger/](https://github.com/googlesamples/android-architecture/tree/todo-mvp-dagger/) - Based on todo-mvp, uses Dagger2 for Dependency Injection
-  * [todo-mvp-contentproviders/](https://github.com/googlesamples/android-architecture/tree/todo-mvp-contentproviders/) - Based on todo-mvp-loaders, fetches data using Loaders and uses Content Providers
-  * [todo-mvp-rxjava/](https://github.com/googlesamples/android-architecture/tree/todo-mvp-rxjava/) - Based on todo-mvp, uses RxJava for concurrency and data layer abstraction.
+## Why a to-do app?
 
-### Samples in progress
-  * [dev-todo-mvp-tablet/](https://github.com/googlesamples/android-architecture/tree/dev-todo-mvp-tablet/) - Based on todo-mvp, adds a master/detail view for tablets.
+<img align="right" src="https://github.com/googlesamples/android-architecture/wiki/images/todoapp.gif" alt="A demo illustraating the UI of the app" width="288" height="512" style="display: inline; float: right"/>
 
-Also, see ["New sample" issues](https://github.com/googlesamples/android-architecture/issues?q=is%3Aissue+is%3Aopen+label%3A%22New+sample%22) for planned samples.
+The app in this project aims to be simple enough that you can understand it quickly, but complex enough to showcase difficult design decisions and testing scenarios. For more information, see the [app's specification](https://github.com/googlesamples/android-architecture/wiki/To-do-app-specification).
 
-### External samples
-These are community contributions that may not be in sync with the rest of the branches.
- * [todo-mvp-fragmentless/](https://github.com/Syhids/android-architecture/tree/todo-mvp-fragmentless) - Based on todo-mvp, uses Android views instead of Fragments.
+## What is it not?
 
-### What does <em>beta</em> mean?
+*   A UI/Material Design sample. The interface of the app is deliberately kept simple to focus on architecture. Check out [Plaid](https://github.com/android/plaid) instead.
+*   A complete Jetpack sample covering all libraries. Check out [Android Sunflower](https://github.com/googlesamples/android-sunflower) or the advanced [Github Browser Sample](https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample) instead.
+*   A real production app with network access, user authentication, etc. Check out the [Google I/O app](https://github.com/google/iosched), [Santa Tracker](https://github.com/google/santa-tracker-android) or [Tivi](https://github.com/chrisbanes/tivi) for that.
 
-We're still making decisions that could affect all samples so we're keeping the
-initial number of variants low before the stable release.
+## Who is it for?
 
-## Why a to-do application?
-
-The aim of the app is to be simple enough that it's understood quickly, but
-complex enough to showcase difficult design decisions and testing scenarios.
-Check out the [app's specification](https://github.com/googlesamples/android-architecture/wiki/To-do-app-specification).
-
-<img src="https://github.com/googlesamples/android-architecture/wiki/images/tasks2.png" alt="Screenshot" width="160" style="display: inline; float: right"/>
-
-Also, a similar project exists to compare JavaScript frameworks, called [TodoMVC](https://github.com/tastejs/todomvc).
-
-## Which sample should I choose for my app?
-
-That's for you to decide: each sample has a README where you'll find metrics
-and subjective assessments. Your mileage may vary depending on the size of the
-app, the size and experience of your team, the amount of maintenance that you
-foresee, whether you need a tablet layout or support multiple platforms, how
-compact you like your codebase, etc.
-
-See also:
-* [Samples at a glance](https://github.com/googlesamples/android-architecture/wiki/Samples-at-a-glance)
-* [How to compare samples](https://github.com/googlesamples/android-architecture/wiki/How-to-compare-samples)
+*   Intermediate developers and beginners looking for a way to structure their app in a testable and maintainable way.
+*   Advanced developers looking for quick reference.
 
 ## Opening a sample in Android Studio
 
-First check out one of the sample branches (`master` won't compile), and then choose to open the `todoapp/` directory. Example:
+To open one of the samples in Android Studio, begin by checking out one of the sample branches, and then open the root directory in Android Studio. The following series of steps illustrate how to open the [usecases](tree/usecases/) sample.
 
-  * `git clone git@github.com:googlesamples/android-architecture.git`
-  * `git checkout todo-mvp` (or replace `todo-mvp` with the project you want to check out)
-  * In Android Studio open the `todoapp/` directory.
+Clone the repository:
 
-## Who is behind this project?
+```
+git clone git@github.com:googlesamples/android-architecture.git
+```
+This step checks out the master branch. If you want to change to a different sample: 
 
-This project is **built by the community** and curated by Google and core maintainers.
+```
+git checkout usecases
+```
 
-### External contributors
+**Note:** To review a different sample, replace `usecases` with the name of sample you want to check out.
 
-[David González](http://github.com/malmstein) - Core developer (Content Providers sample)
+Finally open the `android-architecture/` directory in Android Studio.
 
-[Karumi](http://github.com/Karumi) - Developers (MVP Clean architecture sample)
+### License
 
-[Natalie Masse](http://github.com/freewheelnat) - Core developer
 
-[Erik Hellman](https://github.com/ErikHellman) - Developer (MVP RxJava sample)
+```
+Copyright 2019 Google, Inc.
 
-[Saúl Molinero](https://github.com/saulmm) - Developer (MVP Dagger sample)
+Licensed to the Apache Software Foundation (ASF) under one or more contributor
+license agreements. See the NOTICE file distributed with this work for
+additional information regarding copyright ownership. The ASF licenses this
+file to you under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License. You may obtain a copy of
+the License at
 
-[Florina Muntenescu](https://github.com/florina-muntenescu) - Developer (MVP RxJava sample)
+http://www.apache.org/licenses/LICENSE-2.0
 
-### Googlers
-
-[Jose Alcérreca](http://github.com/JoseAlcerreca) - Lead/Core developer
-
-[Stephan Linzner](http://github.com/slinzner) - Core developer
-
-[Mustafa Kurtuldu](https://github.com/mustafa-x) - UX/design
-
-Want to be part of it? Read [how to become a contributor](https://github.com/googlesamples/android-architecture/blob/master/CONTRIBUTING.md) and the [contributor's guide](https://github.com/googlesamples/android-architecture/wiki/Contributions)
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations under
+the License.
+```
